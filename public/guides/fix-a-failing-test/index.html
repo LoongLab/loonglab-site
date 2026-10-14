@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guide: fix a failing test with LoongCode</title>
+  <meta name="description" content="A step-by-step LoongCode workflow: reproduce a test failure, read the code, repair it, and verify the fix — with the exact prompts to use." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+  <script src="../../assets/theme.js"></script>
+</head>
+<body>
+<!-- BEGIN:site-header -->
+<!-- END:site-header -->
+
+<main>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Guide · Workflow</p>
+      <h1>Fix a failing test.</h1>
+      <p class="lede">
+        The core loop of a coding agent: reproduce the failure, understand it,
+        change the code, and prove the change. LoongCode runs that loop against
+        your real repository.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>The task</h2>
+      <p>Start LoongCode in the project and describe the goal:</p>
+      <div class="code-block" data-copy><pre>Fix the failing tests in this repository.</pre></div>
+      <p>
+        Naming a specific test narrows the work, but LoongCode can find the
+        failure itself by running your test command.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What happens</h2>
+      <ol class="feature-list">
+        <li><strong>Explore.</strong> It reads the relevant files and searches the tree to locate the failing code.</li>
+        <li><strong>Reproduce.</strong> It runs your test command and reads the actual failure.</li>
+        <li><strong>Repair.</strong> It makes a targeted edit — not a rewrite — and shows the diff.</li>
+        <li><strong>Verify.</strong> It runs the tests again and reports the result. If they still fail, it keeps going.</li>
+      </ol>
+      <p>
+        Every step is visible: each tool call and a live preview of its output
+        stream past as the agent works.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Steering it</h2>
+      <p>
+        If the agent heads the wrong way, you do not wait for it to finish:
+      </p>
+      <ul class="feature-list">
+        <li>Type a message and press Enter to redirect it mid-task.</li>
+        <li>Press Esc to abort, or Alt+Enter to queue a follow-up.</li>
+        <li>Press Ctrl+O to expand a tool result you want to read in full.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Good prompts for this workflow</h2>
+      <div class="code-block"><pre>Fix the failing tests and explain what the bug was.
+The test in tests/auth.test.ts is failing — find out why before changing anything.
+Make the failing test pass without changing the test itself.</pre></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="actions">
+        <a class="button button-primary" href="../">All guides</a>
+        <a class="button" href="../../first-investigation/">Your first task</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- BEGIN:site-footer -->
+<!-- END:site-footer -->
+<script src="../../assets/main.js"></script>
+</body>
+</html>

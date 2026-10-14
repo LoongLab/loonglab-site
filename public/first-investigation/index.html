@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your first LoongCode task</title>
+  <meta name="description" content="A guided first task with LoongCode: give the agent a failing test, watch it investigate, change the code, and verify the fix in your terminal." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+<!-- BEGIN:site-header -->
+<!-- END:site-header -->
+
+<main>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">First task</p>
+      <h1>Fix a failing test.</h1>
+      <p class="lede">
+        The fastest way to see how LoongCode works is a small bug. You give it the
+        goal; it does the investigation, the change and the verification.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>1. Start LoongCode in your project</h2>
+      <div class="code-block"><pre>cd ~/my-project
+loongcode</pre></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>2. Ask for the fix</h2>
+      <p>Type this into the prompt:</p>
+      <div class="code-block" data-copy><pre>Fix the failing tests in this repository.</pre></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>3. Watch it work</h2>
+      <p>You see every step as it happens — the tool calls and a live preview of their output:</p>
+      <div class="code-block"><pre>▸ read src/math.ts
+✓ read src/math.ts
+▸ bash bun test math.test.ts
+✓ bash bun test math.test.ts      ← observes the failure
+▸ edit src/math.ts                ← repairs the code
+✓ edit src/math.ts
+▸ bash bun test math.test.ts
+✓ bash bun test math.test.ts      ← verifies: all tests pass
+
+Fixed the add() function ... All tests pass.</pre></div>
+      <p>
+        A failure is not an error to the agent — it is information. It keeps
+        repairing and re-verifying until the task is done or it needs you.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>4. Stay in control</h2>
+      <ul class="feature-list">
+        <li><strong>Steer</strong> — type a message and press Enter while it works; it changes direction.</li>
+        <li><strong>Queue</strong> — Alt+Enter queues a follow-up for after the current task.</li>
+        <li><strong>Interrupt</strong> — Esc aborts; queued messages return to the editor.</li>
+        <li><strong>Expand</strong> — Ctrl+O shows full tool output instead of a preview.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>5. Go further</h2>
+      <p>
+        Once a task is done, your work is saved. Exit and return with
+        <code>--continue</code>, or open <code>/session</code> to manage sessions.
+      </p>
+      <div class="actions">
+        <a class="button button-primary" href="../guides/">Read a workflow guide</a>
+        <a class="button" href="../get-started/">Get started</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- BEGIN:site-footer -->
+<!-- END:site-footer -->
+<script src="../assets/main.js"></script>
+</body>
+</html>

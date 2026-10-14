@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Install LoongCode and run your first task</title>
+  <meta name="description" content="Install LoongCode, configure a model, and run your first coding task from the terminal. Requires Node.js 22 or newer." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+<!-- BEGIN:site-header -->
+<!-- END:site-header -->
+
+<main>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Get started</p>
+      <h1>Install LoongCode.</h1>
+      <p class="lede">
+        One package, one install. LoongCode runs on Node.js 22 or newer, on
+        Windows, macOS and Linux.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>1. Install</h2>
+      <p>Install globally, then run it in any project:</p>
+      <div class="code-block" data-copy><pre>npm install -g @loonglab/loongcode-cli
+cd ~/my-project
+loongcode</pre></div>
+      <p>
+        Prefer not to install? Run it once with <code>npx @loonglab/loongcode-cli</code>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>2. Configure a model</h2>
+      <p>
+        On first launch LoongCode sets up a model before the workspace opens. It
+        speaks the <code>openai</code> and <code>anthropic</code> protocols, so it
+        works with the official APIs and any compatible endpoint.
+      </p>
+      <ul class="feature-list">
+        <li>Choose an existing configuration or add one: protocol, endpoint, model name, API key.</li>
+        <li>A real connection test must pass before anything is saved.</li>
+        <li>Configuration is stored locally at <code>~/.loongcode/models.json</code>.</li>
+      </ul>
+      <p>Switch models any time with <code>/model</code> or Ctrl+P.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>3. Give it a task</h2>
+      <p>Type a task in plain language and press Enter:</p>
+      <div class="code-block" data-copy><pre>Fix the failing tests in this repository.</pre></div>
+      <p>
+        LoongCode explores the code, makes changes, runs your commands, and
+        verifies its own work. Watch it live and steer it whenever you want.
+      </p>
+      <div class="actions">
+        <a class="button button-primary" href="../first-investigation/">Your first task →</a>
+        <a class="button" href="../guides/">Browse the guides</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Non-interactive use</h2>
+      <p>For scripts and CI:</p>
+      <div class="code-block"><pre>loongcode -p "run the tests and report failures"   # print the final response
+loongcode --mode json -p "find TODO comments"      # stream events as JSON lines
+loongcode -c -p "now fix what you found"           # continue the last session</pre></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Troubleshooting</h2>
+      <ul class="feature-list">
+        <li><strong>The workspace never opens</strong> — no model is active yet. Finish the setup flow, or write <code>~/.loongcode/models.json</code> directly.</li>
+        <li><strong>A command fails immediately</strong> — on Windows, commands run in PowerShell by default; set <code>"shell": "cmd"</code> in settings to use CMD.</li>
+        <li><strong>A long task slows down</strong> — LoongCode summarizes older context to keep requests bounded; it will tell you when it does.</li>
+      </ul>
+      <p>
+        Still stuck? Open an
+        <a href="https://github.com/LoongLab/LoongCode/issues" rel="noopener">issue</a>.
+      </p>
+    </div>
+  </section>
+</main>
+
+<!-- BEGIN:site-footer -->
+<!-- END:site-footer -->
+<script src="../assets/main.js"></script>
+</body>
+</html>

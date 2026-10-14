@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guide: track down a bug with LoongCode</title>
+  <meta name="description" content="A step-by-step LoongCode workflow: reproduce a bug, follow the evidence through the code, prove the cause, and verify the fix — with the exact prompts to use." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+  <script src="../../assets/theme.js"></script>
+</head>
+<body>
+<!-- BEGIN:site-header -->
+<!-- END:site-header -->
+
+<main>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Guide · Workflow</p>
+      <h1>Track down a bug.</h1>
+      <p class="lede">
+        The hard part of a bug is usually not the fix — it is finding the cause.
+        LoongCode follows the evidence through the code and tells you what it
+        found, rather than guessing at a patch.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>The task</h2>
+      <p>Describe the symptom and, if you can, how to reproduce it:</p>
+      <div class="code-block" data-copy><pre>Users report that saving a duplicate name overwrites the original.
+Reproduce it, find the cause, then fix it.</pre></div>
+      <p>
+        A reproduction is the most valuable input you can give. Without one, ask
+        the agent to find or write one first — a bug you cannot trigger is a bug
+        you cannot confirm you fixed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What happens</h2>
+      <ol class="feature-list">
+        <li><strong>Reproduce.</strong> It runs the failing command or test and reads the actual output — a stack trace, an error, a wrong value.</li>
+        <li><strong>Follow the evidence.</strong> It traces from the symptom back toward the cause: the calling code, the data, the state. A failure is information, and it keeps pulling the thread.</li>
+        <li><strong>Name the cause.</strong> It explains what is wrong and why, with the code that shows it — not just where to patch.</li>
+        <li><strong>Fix and verify.</strong> It makes the smallest change that addresses the cause and re-runs the check that failed.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Ask before you accept the fix</h2>
+      <p>
+        A patch that makes a symptom disappear is not the same as a bug fixed.
+        Ask for the reasoning, and for whether the cause is addressed:
+      </p>
+      <div class="code-block"><pre>Reproduce the failure in tests, explain the root cause, then fix it.
+Don't change the test to make it pass — the test is correct.
+Show me every place this same bug could occur.</pre></div>
+      <p>
+        That last line matters: a good bug hunt asks whether this is one instance
+        of a pattern, not a one-off.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>When the answer is "I can't reproduce it"</h2>
+      <p>
+        That is a useful result, not a failure. The agent will say what it tried
+        and what it observed. From there you can narrow the environment, supply
+        input that triggers it, or ask for instrumentation to log the state at the
+        point where you expect the bug.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="actions">
+        <a class="button button-primary" href="../">All guides</a>
+        <a class="button" href="../fix-a-failing-test/">Fix a failing test</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- BEGIN:site-footer -->
+<!-- END:site-footer -->
+<script src="../../assets/main.js"></script>
+</body>
+</html>

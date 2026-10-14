@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The context window is a budget — LoongCode</title>
+  <meta name="description" content="Why long tasks are where coding agents fail, and how LoongCode manages context at every boundary so sessions stay coherent and affordable." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+  <script src="../../assets/theme.js"></script>
+</head>
+<body>
+<!-- BEGIN:site-header -->
+<!-- END:site-header -->
+
+<main>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Engineering</p>
+      <h1>The context window is a budget.</h1>
+      <p class="lede">
+        A coding agent is mostly a loop: explore, change, run, verify. The loop is
+        cheap to describe and expensive to run, because every step lands in the
+        context window and is paid for again on every request that follows.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Where the tokens go</h2>
+      <p>
+        An agent reading a file, searching the tree, running a test and reading a
+        stack trace produces a lot of output — most of it useful exactly once.
+        Left alone, that history grows until the request no longer fits the
+        window. At that point an agent does one of two bad things: it truncates
+        and loses the thread, or it stalls outright.
+      </p>
+      <p>
+        Neither is necessary. The output of a tool call is not equally valuable
+        forever. A file you read twenty steps ago is usually summarizable; the
+        result you got one step ago is what the current decision rests on. A
+        context system should reflect that.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Three layers, each doing the cheapest thing</h2>
+      <p>LoongCode manages context at every boundary, from cheapest to most expensive:</p>
+      <ol class="feature-list">
+        <li>
+          <strong>Cap at the source.</strong> Oversized tool output is capped as it
+          is produced — spilled to a file with a short preview — so a single huge
+          result cannot flood the window in the first place.
+        </li>
+        <li>
+          <strong>Reduce at request time.</strong> Only when a request would exceed
+          its input budget, older tool results are replaced by compact markers,
+          oldest first, and only as many as it takes to fit. The current turn is
+          protected: it is what the agent is working on.
+        </li>
+        <li>
+          <strong>Summarize durably.</strong> When history truly overflows, older
+          turns are summarized into one message with a recent tail preserved, so
+          the session continues instead of ending.
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Reduction must be reversible</h2>
+      <p>
+        Truncation loses information. The interesting design question is how to
+        reduce without losing the thread. LoongCode's answer is that a withheld
+        result is not deleted — it is replaced by a structured pointer back:
+      </p>
+      <ul class="feature-list">
+        <li>
+          <strong>A route to the full output.</strong> The marker names where the
+          content still lives — the spilled file, or the file a read came from —
+          so the agent can go back for detail instead of guessing.
+        </li>
+        <li>
+          <strong>Failure evidence is never withheld.</strong> Errors and failed
+          commands are exactly the facts a long task depends on, so they survive
+          even when everything around them is reduced.
+        </li>
+        <li>
+          <strong>Your history is never rewritten by reduction.</strong> Reduction
+          is a request-time view only. The saved session keeps every result.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Why this matters for cost</h2>
+      <p>
+        Cost in a coding agent is not one number — it is the size of every request,
+        multiplied by the number of steps. A smaller, well-managed context is not
+        only cheaper; it is also what keeps a long task coherent, because the model
+        is not drowning in stale output.
+      </p>
+      <p class="lede">
+        The goal is not the smallest possible context. It is the smallest context
+        that still answers the question — with a way back to the rest.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="muted">
+        The mechanics described here are implemented in LoongCode's context layer;
+        see the <a href="https://github.com/LoongLab/LoongCode" rel="noopener">project repository</a>.
+      </p>
+      <div class="actions">
+        <a class="button" href="../">More articles</a>
+        <a class="button button-primary" href="../../get-started/">Try LoongCode</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- BEGIN:site-footer -->
+<!-- END:site-footer -->
+<script src="../../assets/main.js"></script>
+</body>
+</html>

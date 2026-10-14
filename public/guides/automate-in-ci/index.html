@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guide: automate with LoongCode in scripts and CI</title>
+  <meta name="description" content="Run LoongCode non-interactively: print a final answer with -p, stream every run event as JSON lines with --mode json, and continue sessions in CI." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+  <script src="../../assets/theme.js"></script>
+</head>
+<body>
+<!-- BEGIN:site-header -->
+<!-- END:site-header -->
+
+<main>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Guide · Automation</p>
+      <h1>Automate in scripts and CI.</h1>
+      <p class="lede">
+        LoongCode is a terminal agent, but it does not need a terminal. The same
+        tasks you run interactively run headless with <code>-p</code>, and the
+        runtime's full event stream is available as JSON.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Print mode</h2>
+      <p>Run one task, print the final response, and exit:</p>
+      <div class="code-block" data-copy><pre>loongcode -p "run the tests and report failures" /path/to/project</pre></div>
+      <p>
+        The workspace can be given as an argument, or set with
+        <code>--cwd &lt;dir&gt;</code>. Print mode exits <code>0</code> when the run
+        reached a final answer and <code>1</code> otherwise — so you can branch on
+        it in a script.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>JSON event mode</h2>
+      <p>
+        Add <code>--mode json</code> to stream every run event as a JSON line,
+        followed by a final result line. This is the mode for tooling: you get the
+        agent's progress as data, not as terminal output.
+      </p>
+      <div class="code-block" data-copy><pre>loongcode --mode json -p "find all TODO comments" /path/to/project</pre></div>
+      <p>The stream includes events such as:</p>
+      <ul class="feature-list">
+        <li><code>run_start</code> — the task and the model identity.</li>
+        <li><code>iteration_start</code>, <code>assistant_delta</code> — progress within each step.</li>
+        <li><code>tool_call</code> and <code>tool_result</code> — every tool the agent used and what it returned.</li>
+        <li><code>model_response</code> — token usage for the call, when the provider reports it.</li>
+        <li><code>compaction</code>, <code>projection_reduced</code> — context-management events, so cost behaviour is visible in the stream.</li>
+        <li><code>run_end</code> — the run's summary.</li>
+      </ul>
+      <p>
+        Each line is a complete JSON object, so standard tools — <code>jq</code>,
+        a log pipeline, a CI step — can consume it directly.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Continuing a session</h2>
+      <p>
+        Workspace sessions persist automatically. Continue the most recent one, or
+        resume a specific one by id:
+      </p>
+      <div class="code-block"><pre># continue the most recent session in this workspace
+loongcode -c -p "now fix the issue you found" /path/to/project
+
+# resume a specific session
+loongcode --resume &lt;id&gt; -p "add tests for that fix" /path/to/project</pre></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>A CI example</h2>
+      <p>
+        A step that asks the agent to make the suite pass, and fails the job when
+        it returns non-zero:
+      </p>
+      <div class="code-block"><pre>loongcode -p "run the full test suite and fix any failures" "$PWD"
+status=$?
+if [ "$status" -ne 0 ]; then
+  echo "LoongCode did not reach a passing state." >&2
+  exit 1
+fi</pre></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Project instructions and settings</h2>
+      <p>
+        Headless runs read the same configuration as interactive ones:
+      </p>
+      <ul class="feature-list">
+        <li><code>AGENTS.md</code> (or <code>CLAUDE.md</code>) in the repository root is loaded into the system prompt, so CI runs follow your project's rules.</li>
+        <li>Global settings live at <code>~/.loongcode/settings.json</code> and can be overridden per project at <code>.loongcode/settings.json</code>.</li>
+        <li>Prompt templates (<code>.loongcode/prompts/*.md</code>) and skills (<code>.loongcode/skills/&lt;name&gt;/SKILL.md</code>) load automatically.</li>
+      </ul>
+      <p>
+        On a CI runner with no <code>~/.loongcode</code>, point
+        <code>LOONGCODE_CONFIG_DIR</code> at a prepared directory so the model
+        configuration is available.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="actions">
+        <a class="button button-primary" href="../">All guides</a>
+        <a class="button" href="../../get-started/">Get started</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- BEGIN:site-footer -->
+<!-- END:site-footer -->
+<script src="../../assets/main.js"></script>
+</body>
+</html>

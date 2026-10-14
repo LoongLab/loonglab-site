@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "python3 scripts/site.py deploy-check",
+  "outputDirectory": "_site",
+  "cleanUrls": true
+}

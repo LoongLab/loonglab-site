@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LoongCode FAQ: setup, models and troubleshooting</title>
+  <meta name="description" content="Answers about installing LoongCode, choosing a model, what it can do, how it handles your code, and what it costs." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../assets/styles.css" />
+  <script src="../assets/theme.js"></script>
+</head>
+<body>
+<!-- BEGIN:site-header -->
+<!-- END:site-header -->
+
+<main>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">FAQ</p>
+      <h1>Questions, answered.</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <details>
+        <summary><strong>How do I install LoongCode?</strong></summary>
+        <p>Install Node.js 22 or newer, then run <code>npm install -g @loonglab/loongcode-cli</code>. See <a href="../get-started/">Get started</a>.</p>
+      </details>
+      <details>
+        <summary><strong>Which models can I use?</strong></summary>
+        <p>LoongCode speaks the <code>openai</code> and <code>anthropic</code> protocols, so it works with the official APIs and any compatible endpoint. Configure one with <code>/model</code>.</p>
+      </details>
+      <details>
+        <summary><strong>Do I need Bun?</strong></summary>
+        <p>No. Bun is the development runtime for working on LoongCode itself. The published package runs on Node.js 22 or newer.</p>
+      </details>
+      <details>
+        <summary><strong>Does LoongCode upload my code?</strong></summary>
+        <p>It runs locally and talks only to the model endpoint you configure, using the API key you provide. Your source is sent to that endpoint as context for the tasks you run; the provider's own data policy applies.</p>
+      </details>
+      <details>
+        <summary><strong>What does it cost to run?</strong></summary>
+        <p>LoongCode itself is free and open source (Apache-2.0). You pay only your model provider for the tokens you use — and LoongCode is built to keep that number down on long tasks.</p>
+      </details>
+      <details>
+        <summary><strong>How does LoongCode keep token usage down?</strong></summary>
+        <p>Context is managed at every boundary: output is capped as it is produced, older tool results are reduced only when a request would exceed its budget, and overflowing history is summarized while keeping a recent tail. See <a href="../blog/context-management/">how context is managed</a>.</p>
+      </details>
+      <details>
+        <summary><strong>Does reducing context lose information?</strong></summary>
+        <p>A withheld result is replaced by a marker that names where the full output still lives, so the agent can read it back. Failure evidence and errors are never withheld, and reduction only changes the request that is sent — the saved session keeps every result.</p>
+      </details>
+      <details>
+        <summary><strong>Where is my work saved?</strong></summary>
+        <p>Sessions are saved automatically under your config directory (<code>~/.loongcode/</code>). Resume the latest with <code>--continue</code>, a specific one with <code>--resume &lt;id&gt;</code>, or manage them with <code>/session</code>.</p>
+      </details>
+      <details>
+        <summary><strong>Which agents or editors does it work with?</strong></summary>
+        <p>LoongCode is its own terminal agent — you use it directly, not through another agent. Its configuration and sessions are read by the CLI and TUI only.</p>
+      </details>
+      <details>
+        <summary><strong>Is it ready for production use?</strong></summary>
+        <p>LoongCode is in early experimental development and changes quickly. See the <a href="https://github.com/LoongLab/LoongCode/blob/master/CHANGELOG.md" rel="noopener">changelog</a> for what each release includes.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<!-- BEGIN:site-footer -->
+<!-- END:site-footer -->
+<script src="../assets/main.js"></script>
+</body>
+</html>

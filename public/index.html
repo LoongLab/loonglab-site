@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LoongLab — developer tools for real work</title>
+  <meta name="description" content="LoongLab builds AI products. LoongCode, our first, is a terminal coding agent whose advantage is cutting token consumption on long tasks." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./assets/styles.css" />
+  <script src="./assets/theme.js"></script>
+</head>
+<body>
+<!-- BEGIN:site-header -->
+<!-- END:site-header -->
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">LoongCode · Coding agent</p>
+      <h1>The coding agent that won't burn your context window.</h1>
+      <p class="lede">
+        LoongCode works directly in your repository: it reads the code, makes
+        changes, runs your tests, and verifies its own work — while you watch and
+        steer it in your terminal.
+      </p>
+      <div class="actions">
+        <a class="button button-primary" href="./get-started/">Get started</a>
+        <a class="button" href="./guides/">Browse the guides</a>
+      </div>
+
+      <div class="terminal" data-demo>
+        <div class="terminal-bar">
+          <span>loongcode — example session</span>
+          <button class="copy-button" type="button" data-demo-replay>Replay</button>
+        </div>
+        <div class="terminal-screen" data-demo-screen></div>
+      </div>
+      <p class="muted">
+        An illustrative session showing the explore → change → verify loop.
+        <a href="./first-investigation/">Walk through your own first task →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Context that lasts</h2>
+      <p class="lede">
+        Running a long task is where coding agents fall apart: the window fills
+        with old file reads and command output, the agent starts forgetting what
+        it did, and every request costs more. LoongCode treats context as a
+        budget to defend, not a bucket to fill.
+      </p>
+      <ul class="feature-list">
+        <li><strong>Cap at the source</strong> — oversized output is capped as it is produced and spilled to a file with a short preview.</li>
+        <li><strong>Reduce at request time</strong> — older results become compact markers only when a request would exceed its budget, oldest first.</li>
+        <li><strong>Summarize durably</strong> — when history truly overflows, older turns are summarized with a recent tail preserved.</li>
+      </ul>
+      <p>
+        A withheld result keeps a route back to the full output, failure evidence
+        is never hidden, and reduction never rewrites your saved session.
+      </p>
+      <div class="actions">
+        <a class="button" href="./blog/context-management/">How it works →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-wide">
+      <h2>What you can do</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">Workflow</span>
+          <h3>Fix a failing test</h3>
+          <p>Run the suite, read the failure, repair the code, and prove it passes.</p>
+          <a class="more" href="./guides/fix-a-failing-test/">Read the guide →</a>
+        </article>
+        <article class="card">
+          <span class="tag">Workflow</span>
+          <h3>Refactor a module</h3>
+          <p>Map the callers, then make a focused refactor with reviewed diffs.</p>
+          <a class="more" href="./guides/refactor-a-module/">Read the guide →</a>
+        </article>
+        <article class="card">
+          <span class="tag">Automation</span>
+          <h3>Automate in CI</h3>
+          <p>Run headless with <code>-p</code>, stream events with <code>--mode json</code>.</p>
+          <a class="more" href="./guides/automate-in-ci/">Read the guide →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Bring your own model</h2>
+      <p>
+        LoongCode speaks the <code>openai</code> and <code>anthropic</code>
+        protocols, so it works with the official APIs and any compatible endpoint.
+        Analysis runs locally; your code goes only to the model endpoint you
+        configure.
+      </p>
+      <p class="lede">Free and open source (Apache-2.0). You pay only your model provider.</p>
+      <div class="actions">
+        <a class="button button-primary" href="./get-started/">Install LoongCode</a>
+        <a class="button" href="https://github.com/LoongLab/LoongCode" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="lockup">LoongLab · AI products for people who build software.</p>
+    </div>
+  </section>
+</main>
+
+<!-- BEGIN:site-footer -->
+<!-- END:site-footer -->
+<script src="./assets/main.js"></script>
+<script src="./assets/demo.js"></script>
+</body>
+</html>

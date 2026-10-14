@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guide: refactor a module with LoongCode</title>
+  <meta name="description" content="A step-by-step LoongCode workflow: map a module's callers, make a focused refactor with reviewed diffs, and verify nothing broke — with the exact prompts to use." />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="../../assets/styles.css" />
+  <script src="../../assets/theme.js"></script>
+</head>
+<body>
+<!-- BEGIN:site-header -->
+<!-- END:site-header -->
+
+<main>
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow">Guide · Workflow</p>
+      <h1>Refactor a module.</h1>
+      <p class="lede">
+        Refactoring is mostly understanding: what calls this, what it calls, and
+        what has to stay true while the shape changes. LoongCode does that
+        mapping against the real code before it edits anything.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>The task</h2>
+      <p>Name the module and the change you want, then let it map the blast radius first:</p>
+      <div class="code-block" data-copy><pre>Refactor src/report/builder.ts. Extract the formatting into a
+separate module, update all callers, and make sure the tests still pass.</pre></div>
+      <p>
+        Naming the file bounds the work. If you are unsure where the change
+        belongs, describe the goal and let the agent find the boundary — but a
+        named target keeps the change focused.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What happens</h2>
+      <ol class="feature-list">
+        <li><strong>Map it.</strong> <code>grep</code> and <code>find</code> locate the module's callers; <code>read</code> shows the code with line numbers so the agent can see structure, not guess at it.</li>
+        <li><strong>Plan the change.</strong> It identifies what moves, what stays, and every caller that must be updated.</li>
+        <li><strong>Edit in small steps.</strong> <code>edit</code> replaces one exact span at a time and shows the diff, so a review sees the change, not a rewritten file.</li>
+        <li><strong>Keep the tests green.</strong> It runs your suite — the safety net that makes a refactor safe rather than risky.</li>
+      </ol>
+      <p>
+        Nothing is rewritten wholesale: <code>edit</code> changes a target span
+        and <code>write</code> is used only for genuinely new files. The diff is
+        always visible before you accept it.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Reviewing the diff</h2>
+      <p>
+        This is where you earn the value: the agent proposes, you decide. A good
+        prompt for a refactor asks for reasoning you can check, not just a result:
+      </p>
+      <div class="code-block"><pre>Refactor the auth module. Show me the callers you found first,
+then make the smallest change that removes the duplication.
+Run the tests after each file you touch.</pre></div>
+      <p>
+        If a change is wrong, steer mid-task rather than reverting afterward — the
+        agent has not committed anything, so a redirect is cheap.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Good prompts for this workflow</h2>
+      <div class="code-block"><pre>Find every caller of parseConfig() before changing its signature.
+Extract the duplicated retry logic into one helper and update both call sites.
+Explain what this module does, then suggest a refactor — but make no edits yet.</pre></div>
+      <p>
+        The last one is deliberately read-only: ask for the analysis, read it, and
+        then ask for the change. For a large refactor that is often the better
+        shape.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="actions">
+        <a class="button button-primary" href="../">All guides</a>
+        <a class="button" href="../fix-a-failing-test/">Fix a failing test</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- BEGIN:site-footer -->
+<!-- END:site-footer -->
+<script src="../../assets/main.js"></script>
+</body>
+</html>
